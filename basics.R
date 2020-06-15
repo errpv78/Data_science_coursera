@@ -284,7 +284,83 @@ b 2 4
 
 "rm(x, y) - to remove x, y from environment."
 
+# Date and Times in R
+"Dates are represented by Date class(internally as no of days 
+since 1970-01-01)
+Times are represented by POSIXct or POSIXlt class (internally as
+no of seconds since 1970-01-01)
+POSIXct - very large int under the hood; it is useful when to 
+store times in a df
+POSIClt - a list underneath and stores bunch of other useful 
+information like day of week, day of month, day of year
 
+# Date
+> x = as.Date('1970-01-01')
+> unclass(x) - no of days since 1970-01-01
+[1] 0 
+> x = as.Date('2000-10-31')
+> unclass(x)
+[1] 11261
+
+# Time
+> x = Sys.time()
+> x
+[1] '2020-06-15 12:22:03 IST'
+> pct = as.POSIXct(x)
+> pct
+[1] '2020-06-15 12:22:03 IST'
+> plt = as.POSIXlt(x)
+> plt
+[1] '2020-06-15 12:22:03 IST'
+> unclass(pct)
+[1] 1592203923
+> unclass(plt)
+$sec
+[1] 3.289633
+
+$min
+[1] 22
+
+$hour
+[1] 12
+
+$mday
+[1] 15
+
+$mon
+[1] 5
+
+$year
+[1] 120
+
+$wday
+[1] 1
+
+$yday
+[1] 166
+
+$isdst
+[1] 0
+
+$zone
+[1] 'IST'
+
+$gmtoff
+[1] 19800
+
+attr(,'tzone')
+[1] ''    'IST' 'IST'
+
+"
+
+"strptime function if dates are written in a different format
+> datestring = c('October 31, 2000 13:10', 'February 3, 2000 9:10')
+> x = strptime(datestring, '%B %d, %Y %H:%M')
+> x
+[1] '2000-10-31 13:10:00 IST' '2000-02-03 09:10:00 IST'
+> class(x)
+[1] 'POSIXlt' 'POSIXt' 
+"
 
 
 
